@@ -6,6 +6,7 @@ const initialState = {
   cachedPages: null,
   moviesInView: [],
   pagesInView: [],
+  query: null,
   error: null,
 };
 

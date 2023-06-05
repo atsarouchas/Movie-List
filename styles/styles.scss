@@ -70,7 +70,20 @@ body {
   border-radius: 4px;
   cursor: pointer;
   transition: all linear .2s;
-  background-size: cover;
+  background-size: contain;
+  font-family: sans-serif;
+  text-shadow: 
+  -1px -1px 1px #111, 
+  2px 2px 1px #363636;
+  font-weight: bold;
+  font-size: x-large;
+  padding: 16px;
+}
+
+#movie-not-found {
+  font-size: 40px;
+  font-family: sans-serif;
+  margin-top: 40px;
 }
 
 .movie-card:hover {
@@ -80,7 +93,6 @@ body {
 
 header {
   text-align: center;
-  border: 1px solid white;
   color: white;
   padding: 24px;
 }
@@ -97,7 +109,6 @@ header {
 
 main {
   text-align: center;
-  border: 1px solid white;
   color: white;
   height: 100%;
 }
