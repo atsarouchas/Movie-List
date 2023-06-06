@@ -1,28 +1,28 @@
 export class DomElement {
-  element: HTMLElement;
+  current: HTMLElement;
 
   constructor(type: string) {
     const createdElement = document.createElement(type);
-    this.element = createdElement;
+    this.current = createdElement;
   }
 
   on(eventName: string, eventHandler: () => void) {
-    this.element.addEventListener(eventName, eventHandler);
+    this.current.addEventListener(eventName, eventHandler);
     return this;
   }
 
   appendElement(childElement: HTMLElement) {
-    this.element.append(childElement);
+    this.current.append(childElement);
     return this;
   }
 
   setAttribute(attrName: string, attrValue: any) {
-    this.element.setAttribute(attrName, attrValue);
+    this.current.setAttribute(attrName, attrValue);
     return this;
   }
 
   setInnerHtml(innerHtml: string) {
-    this.element.innerHTML = innerHtml;
+    this.current.innerHTML = innerHtml;
     return this;
   }
 }

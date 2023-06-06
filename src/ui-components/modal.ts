@@ -8,7 +8,7 @@ export function showModal(data: any) {
 
   const modalContent = new DomElement('div');
   modalContent.setInnerHtml(data.title);
-  modal?.append(modalContent.element as unknown as Node);
+  modal?.append(modalContent.current as unknown as Node);
 
   backdrop?.addEventListener('click', hideModal);
 

@@ -16,25 +16,25 @@ describe('DomElement', () => {
   it('on method adds event listener to the element', () => {
     const mockEventHandler = jest.fn();
     domElement.on('click', mockEventHandler);
-    domElement.element.dispatchEvent(new Event('click'));
+    domElement.current.dispatchEvent(new Event('click'));
     expect(mockEventHandler).toHaveBeenCalledTimes(1);
   });
 
   it('appendElement method appends a child element', () => {
     domElement.appendElement(mockChildElement);
-    expect(domElement.element.contains(mockChildElement)).toBeTruthy();
+    expect(domElement.current.contains(mockChildElement)).toBeTruthy();
   });
 
   it('setAttribute method sets an attribute on the element', () => {
     const attrName = 'data-testid';
     const attrValue = 'test-id';
     domElement.setAttribute(attrName, attrValue);
-    expect(domElement.element.getAttribute(attrName)).toBe(attrValue);
+    expect(domElement.current.getAttribute(attrName)).toBe(attrValue);
   });
 
   it('setInnerHtml method sets the inner HTML of the element', () => {
     const innerHtml = '<p>Hello, World!</p>';
     domElement.setInnerHtml(innerHtml);
-    expect(domElement.element.innerHTML).toBe(innerHtml);
+    expect(domElement.current.innerHTML).toBe(innerHtml);
   });
 });

@@ -1,5 +1,6 @@
 import { DomElement } from '../../libraries/dom/DomElement';
 import { state } from '../../libraries/state/AppState';
+import { openModal } from '../../libraries/state/actions';
 import { fetchWhenScrollToBottom } from './ui-effects/fetchWhenScrollToBottom';
 import { initialFetch } from './ui-effects/initialFetch';
 
@@ -17,7 +18,7 @@ export async function moveList() {
         .setAttribute('id', 'movie-not-found')
         .setInnerHtml(':( We could not find a movie that matches this search');
 
-      return app?.append(element.element);
+      return app?.append(element.current);
     }
 
     const elements = (newState.moviesInView || []).map((item: any) => {
@@ -35,18 +36,10 @@ export async function moveList() {
           }`
         )
         .on('click', () => {
-          const oldState = state.getState();
-
-          state.setState({
-            ...oldState,
-            modalOpen: item.id,
-            modalData: {
-              title: item.title,
-            },
-          });
+          openModal(item);
         });
 
-      return element.element;
+      return element.current;
     });
 
     elements.forEach((el: HTMLElement) => app?.append(el));

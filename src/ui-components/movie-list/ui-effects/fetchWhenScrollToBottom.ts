@@ -1,9 +1,10 @@
-import { showLoading } from '../../../libraries/dom/utils';
-import { debounce } from '../../../utils/debounce';
-import { isScrollAtBottom } from '../../../utils/handleScrollToBottom';
+import { showEndOfResults, showLoading } from '../../../libraries/dom/utils';
+import { debounce, isScrollAtBottom } from '../../../utils/';
 import { fetchMovies } from '../../../services/fetchMovies';
 import { state } from '../../../libraries/state/AppState';
 import { searchMovies } from '../../../services/searchMovies';
+import { setError, setMovies } from '../../../libraries/state/actions';
+import { DomElement } from '../../../libraries/dom/DomElement';
 
 const fetchNewPage = () => {
   const currentState = state.getState();
@@ -14,27 +15,16 @@ const fetchNewPage = () => {
 
   fetchNewMovies
     .then((data) => {
-      state.setState({
-        ...currentState,
-        moviesInView: [...data.results],
-        cachedPages: {
-          ...currentState.cachedPages,
-          [data.page]: [...data.results],
-        },
-        pagesInView: [...currentState.pagesInView, data.page],
-        currentPage: data.page,
-      });
+      setMovies(data);
 
       window.addEventListener('scroll', fetchWhenScrollToBottom);
     })
     .catch((error) => {
       console.error('Error:', error);
-      state.setState({
-        ...currentState,
-        error: `Error while fetching movies for page${
-          currentState.currentPage + 1
-        }`,
-      });
+      setError(
+        `Error while fetching movies for page${currentState.currentPage + 1}`
+      );
+
       window.addEventListener('scroll', fetchWhenScrollToBottom);
     });
 };
@@ -42,7 +32,14 @@ const fetchNewPage = () => {
 const debouncedFetchNewPage = debounce(fetchNewPage, 1500);
 
 export const fetchWhenScrollToBottom = () => {
-  if (isScrollAtBottom()) {
+  const currentState = state.getState();
+  const isLastPage = currentState.currentPage === currentState.totalPages;
+
+  if (isLastPage) {
+    return showEndOfResults();
+  }
+
+  if (isScrollAtBottom() && !isLastPage) {
     showLoading();
 
     window.removeEventListener('scroll', fetchWhenScrollToBottom);

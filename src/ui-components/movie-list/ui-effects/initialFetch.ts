@@ -1,16 +1,9 @@
-import { state } from '../../../libraries/state/AppState';
+import { hideEndOfResults } from '../../../libraries/dom/utils';
+import { setInitialNowPlayingMovies } from '../../../libraries/state/actions';
 import { fetchMovies } from '../../../services/fetchMovies';
 
 export const initialFetch = async () => {
-  const initialState = state.getState();
+  hideEndOfResults();
   const data = await fetchMovies(1);
-  state.setState({
-    ...initialState,
-    moviesInView: data.results,
-    query: null,
-    cachedPages: {
-      [data.page]: [...data.results],
-    },
-    pagesInView: [1],
-  });
+  setInitialNowPlayingMovies(data);
 };
