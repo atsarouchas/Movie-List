@@ -1,5 +1,4 @@
 import { hideLoading } from '../libraries/dom/utils';
-import { state } from '../libraries/state/AppState';
 
 export const fetchMovies = async (currentPage: number) => {
   try {
@@ -9,13 +8,6 @@ export const fetchMovies = async (currentPage: number) => {
     const data = await response.json();
 
     return data;
-  } catch (err) {
-    const currentState = state.getState();
-    state.setState({
-      ...currentState,
-      error: 'Something went wrong while fetching the movies',
-    });
-    return { results: [] };
   } finally {
     hideLoading();
   }

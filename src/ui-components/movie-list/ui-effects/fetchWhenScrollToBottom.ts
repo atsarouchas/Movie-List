@@ -4,7 +4,6 @@ import { fetchMovies } from '../../../services/fetchMovies';
 import { state } from '../../../libraries/state/AppState';
 import { searchMovies } from '../../../services/searchMovies';
 import { setError, setMovies } from '../../../libraries/state/actions';
-import { DomElement } from '../../../libraries/dom/DomElement';
 
 const fetchNewPage = () => {
   const currentState = state.getState();
@@ -34,6 +33,10 @@ const debouncedFetchNewPage = debounce(fetchNewPage, 1500);
 export const fetchWhenScrollToBottom = () => {
   const currentState = state.getState();
   const isLastPage = currentState.currentPage === currentState.totalPages;
+
+  if (currentState.error) {
+    return;
+  }
 
   if (isLastPage) {
     return showEndOfResults();

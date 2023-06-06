@@ -34,6 +34,7 @@ export const setError = (errorText: string) => {
   const currentState = state.getState();
   state.setState({
     ...currentState,
+    moviesInView: [],
     error: errorText,
   });
 };
