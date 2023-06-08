@@ -38,8 +38,4 @@ export function search(): void {
 
     debouncedInputHandler(e);
   });
-
-  state.subscribe((newState) =>
-    console.log('+++ New state from search:', newState)
-  );
 }

@@ -56,7 +56,7 @@ body {
   @extend .centered;
   position: fixed;
   z-index: 2;
-  width: 80vw;
+  width: 800px;
   height: 70vh;
   background-color: white;
   border-radius: 4px;
@@ -83,6 +83,11 @@ body {
   padding: 16px;
   position: relative;
   overflow-y: auto;
+}
+
+.no-image {
+  background-position: center;
+  background-size: cover;
 }
 
 .movie-details {
@@ -116,7 +121,7 @@ body {
   margin-top: 40px;
 }
 
-.movie-card:hover {
+.movie-card:hover, .movie-card:focus {
   transform: scale(1.1);
   box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px, rgba(255, 255, 255, 0.2) 0px 8px 24px, rgba(255, 255, 255, 0.2) 0px 16px 48px;
 }
@@ -282,4 +287,24 @@ main {
   border: 2px solid lightgray;
   border-radius: 4px;
   margin-top: 8px;
+}
+
+.similar-movie {
+  display: flex;
+  border: 2px solid lightgray;
+  margin: 4px;
+  border-radius: 4px;
+  padding: 8px;
+  gap: 24px;
+  line-height: 22px;
+
+  & img {
+    height: 80px;
+    width: 80px;
+  }
+}
+
+.similar-movie:hover {
+  background-color: rgb(226, 226, 226);
+  cursor: pointer;
 }

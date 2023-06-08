@@ -47,16 +47,6 @@ export const showModal = () => {
 
   backdrop?.classList.add('visible');
   modal?.classList.remove('display-none');
-  modal?.animate(
-    [
-      { width: 0, height: 0 },
-      { width: '80vw', height: '70vh' },
-    ],
-    {
-      duration: 150,
-      iterations: 1,
-    }
-  );
   mainContent?.classList.add('blurry');
   document.body?.classList.add('overflow-hidden');
 };

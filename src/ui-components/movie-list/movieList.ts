@@ -39,6 +39,10 @@ export async function moveList() {
     }
 
     const elements = (newState.moviesInView || []).map((item: any) => {
+      if (document.getElementById(item.id)) {
+        return;
+      }
+
       const movieDetailsElement = new DomElement('div');
 
       const releaseDate = new Date(item.release_date);
@@ -48,8 +52,12 @@ export async function moveList() {
         <div class="movie-details">
           <hr></hr>
           <div>
-            <span>${item.vote_average.toFixed(1)}☆</span>
-            <span>${year}</span>
+            ${
+              !isNaN(item.vote_average.toFixed(1))
+                ? `<span>${item.vote_average.toFixed(1)}☆</span>`
+                : ''
+            }
+            ${!isNaN(year) ? `<span>${year}</span>` : ''}
           </div>
         </div>
       `);
@@ -76,7 +84,10 @@ export async function moveList() {
       element
         .setInnerHtml(item.title)
         .setAttribute('id', item.id)
-        .setAttribute('class', 'movie-card')
+        .setAttribute(
+          'class',
+          `movie-card ${item.poster_path ? '' : 'no-image'}`
+        )
         .setAttribute(
           'style',
           `background-image:${
@@ -85,8 +96,14 @@ export async function moveList() {
               : 'url(https://nogalss.org/admin/assets/images/no-image2.png)'
           }`
         )
+        .setAttribute('tabIndex', 0)
         .on('click', () => {
           toggleModal(item);
+        })
+        .on('keydown', (event: KeyboardEvent) => {
+          if (event.code === 'Enter') {
+            toggleModal(item);
+          }
         })
         .on('mouseenter', () => {
           showMovieOverview(item.id);
@@ -100,7 +117,11 @@ export async function moveList() {
       return element.current;
     });
 
-    elements.forEach((el: HTMLElement) => app?.append(el));
+    elements.forEach((el: HTMLElement) => {
+      if (el) {
+        app?.append(el);
+      }
+    });
 
     fetchWhenScrollToBottom();
   });

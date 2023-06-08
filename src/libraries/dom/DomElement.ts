@@ -6,7 +6,7 @@ export class DomElement {
     this.current = createdElement;
   }
 
-  on(eventName: string, eventHandler: () => void) {
+  on(eventName: string, eventHandler: (event?: any) => void) {
     this.current.addEventListener(eventName, eventHandler);
     return this;
   }

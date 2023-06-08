@@ -40,9 +40,9 @@ export const setError = (errorText: string) => {
 };
 
 export const toggleModal = (item: any) => {
-  const oldState = state.getState();
+  const currentState = state.getState();
   state.setState({
-    ...oldState,
+    ...currentState,
     modalOpen: item?.id,
     modalData: {
       title: item?.title,
