@@ -39,13 +39,13 @@ export const setError = (errorText: string) => {
   });
 };
 
-export const openModal = (item: any) => {
+export const toggleModal = (item: any) => {
   const oldState = state.getState();
   state.setState({
     ...oldState,
-    modalOpen: item.id,
+    modalOpen: item?.id,
     modalData: {
-      title: item.title,
+      title: item?.title,
     },
   });
 };

@@ -42,7 +42,7 @@ body {
 
 .backdrop {
   z-index: 1;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -54,13 +54,13 @@ body {
 
 .modal {
   @extend .centered;
+  position: fixed;
   z-index: 2;
-  width: 40%;
-  height: 50%;
+  width: 80vw;
+  height: 70vh;
   background-color: white;
   border-radius: 4px;
   opacity: 1;
-  visibility: hidden;
   text-align: center;
 }
 

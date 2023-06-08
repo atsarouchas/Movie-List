@@ -39,3 +39,38 @@ export const showMovieOverview = (id: number) =>
 
 export const hideMovieOverview = (id: number) =>
   document.getElementById(`overview-${id}`)?.classList.add('display-none');
+
+export const showModal = () => {
+  const backdrop = document.querySelector('.backdrop');
+  const modal = document.querySelector('.modal');
+  const mainContent = document.querySelector('.main-content');
+
+  backdrop?.classList.add('visible');
+  modal?.classList.remove('display-none');
+  modal?.animate(
+    [
+      { width: 0, height: 0 },
+      { width: '80vw', height: '70vh' },
+    ],
+    {
+      duration: 150,
+      iterations: 1,
+    }
+  );
+  mainContent?.classList.add('blurry');
+  document.body?.classList.add('overflow-hidden');
+};
+
+export const hideModal = () => {
+  const backdrop = document.querySelector('.backdrop');
+  const modal = document.querySelector('.modal');
+  const mainContent = document.querySelector('.main-content');
+
+  (modal as HTMLElement).innerHTML = '';
+
+  modal?.classList.add('display-none');
+
+  backdrop?.classList.remove('visible');
+  mainContent?.classList.remove('blurry');
+  document.body?.classList.remove('overflow-hidden');
+};

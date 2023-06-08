@@ -4,7 +4,11 @@ import {
   showMovieOverview,
 } from '../../libraries/dom/utils';
 import { state } from '../../libraries/state/AppState';
-import { openModal, setError, setGenres } from '../../libraries/state/actions';
+import {
+  toggleModal,
+  setError,
+  setGenres,
+} from '../../libraries/state/actions';
 import { fetchGenres } from '../../services/fetchGenres';
 import { fetchWhenScrollToBottom } from './ui-effects/fetchWhenScrollToBottom';
 import { fetchNowPlayingInitial } from './ui-effects/initialFetch';
@@ -60,8 +64,6 @@ export async function moveList() {
               .join(', ')
           : '';
 
-      console.log(genres);
-
       movieOverviewElement.setInnerHtml(`
         <div class="movie-overview display-none" id="overview-${item.id}">
          ${item.overview}
@@ -84,7 +86,7 @@ export async function moveList() {
           }`
         )
         .on('click', () => {
-          openModal(item);
+          toggleModal(item);
         })
         .on('mouseenter', () => {
           showMovieOverview(item.id);
