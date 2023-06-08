@@ -28,7 +28,7 @@ const fetchNewPage = () => {
     });
 };
 
-const debouncedFetchNewPage = debounce(fetchNewPage, 1500);
+const debouncedFetchNewPage = debounce(fetchNewPage, 200);
 
 export const fetchWhenScrollToBottom = () => {
   const currentState = state.getState();
