@@ -27,3 +27,9 @@ export const hideError = () => {
     document.getElementById('app')?.removeChild(errorElement);
   }
 };
+
+export const showScrollToTop = () =>
+  document.getElementById('scroll-to-top')?.classList.remove('display-none');
+
+export const hideScrollToTop = () =>
+  document.getElementById('scroll-to-top')?.classList.add('display-none');

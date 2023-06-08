@@ -22,6 +22,21 @@ export async function moveList() {
     }
 
     const elements = (newState.moviesInView || []).map((item: any) => {
+      const movieDetailsElement = new DomElement('div');
+
+      const releaseDate = new Date(item.release_date);
+      const year = releaseDate.getFullYear();
+
+      movieDetailsElement.setInnerHtml(`
+        <div class="movie-details">
+          <hr></hr>
+          <div>
+            <span>${item.vote_average.toFixed(1)}☆</span>
+            <span>${year}</span>
+          </div>
+        </div>
+      `);
+
       const element = new DomElement('div');
       element
         .setInnerHtml(item.title)
@@ -37,7 +52,14 @@ export async function moveList() {
         )
         .on('click', () => {
           openModal(item);
-        });
+        })
+        .on('mouseenter', () => {
+          console.log('enters', item.id);
+        })
+        .on('mouseleave', () => {
+          console.log(item.id);
+        })
+        .appendElement(movieDetailsElement.current);
 
       return element.current;
     });

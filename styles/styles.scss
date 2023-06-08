@@ -78,6 +78,32 @@ body {
   font-weight: bold;
   font-size: x-large;
   padding: 16px;
+  position: relative;
+}
+
+.movie-details {
+  color: black;
+  & div {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  & span {
+    background-color: gold;
+    opacity: 0.8;
+    text-shadow: none;
+    font-weight: normal;
+    padding: 4px;
+    border-radius: 4px;
+    line-height: 22px;
+  }
+
+  & article {
+    font-weight: normal;
+    color: white;
+    background-color: rgb(0, 0, 0, 0.8);
+  }
 }
 
 #movie-not-found {
@@ -203,4 +229,22 @@ main {
   font-family: sans-serif;
   font-size: x-large;
   color: red;
+}
+
+#scroll-to-top {
+  position: fixed;
+  width: 70px;
+  height: 70px;
+  background-color: #4949e3;
+  bottom: 40px;
+  right: 40px;
+  border-radius: 100%;
+  transition: all .2s linear;
+  text-align: center;
+  padding-top: 14px;
+}
+
+#scroll-to-top:hover {
+  background: darkblue;
+  cursor: pointer;
 }
