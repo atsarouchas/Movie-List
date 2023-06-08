@@ -65,3 +65,12 @@ export const setSearchMovies = (data: SearchMovieResults, query: string) => {
     totalPages: data.total_pages,
   });
 };
+
+export const setGenres = (data: { genres: { id: number; name: string }[] }) => {
+  const currentState = state.getState();
+
+  state.setState({
+    ...currentState,
+    genres: data.genres,
+  });
+};

@@ -7,7 +7,7 @@ import { state } from '../libraries/state/AppState';
 import { setError, setSearchMovies } from '../libraries/state/actions';
 import { searchMovies } from '../services/searchMovies';
 import { debounce } from '../utils/debounce';
-import { initialFetch } from './movie-list/ui-effects/initialFetch';
+import { fetchNowPlayingInitial } from './movie-list/ui-effects/initialFetch';
 
 export function search(): void {
   const search = document.getElementById('search');
@@ -16,7 +16,7 @@ export function search(): void {
     const query = (<HTMLTextAreaElement>e?.target).value;
 
     if (query === '') {
-      return initialFetch();
+      return fetchNowPlayingInitial();
     }
 
     searchMovies(query, 1)

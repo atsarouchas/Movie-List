@@ -5,7 +5,7 @@ import {
 } from '../../../libraries/state/actions';
 import { fetchMovies } from '../../../services/fetchMovies';
 
-export const initialFetch = () => {
+export const fetchNowPlayingInitial = () => {
   hideEndOfResults();
   hideError();
   fetchMovies(1)

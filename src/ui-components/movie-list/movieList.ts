@@ -1,11 +1,24 @@
 import { DomElement } from '../../libraries/dom/DomElement';
+import {
+  hideMovieOverview,
+  showMovieOverview,
+} from '../../libraries/dom/utils';
 import { state } from '../../libraries/state/AppState';
-import { openModal } from '../../libraries/state/actions';
+import { openModal, setError, setGenres } from '../../libraries/state/actions';
+import { fetchGenres } from '../../services/fetchGenres';
 import { fetchWhenScrollToBottom } from './ui-effects/fetchWhenScrollToBottom';
-import { initialFetch } from './ui-effects/initialFetch';
+import { fetchNowPlayingInitial } from './ui-effects/initialFetch';
 
 window.onload = async () => {
-  initialFetch();
+  fetchGenres()
+    .then((data) => {
+      setGenres(data);
+      fetchNowPlayingInitial();
+    })
+    .catch((error) => {
+      console.error(error);
+      setError('Something went wrong while fetching the genres');
+    });
 };
 
 export async function moveList() {
@@ -37,6 +50,26 @@ export async function moveList() {
         </div>
       `);
 
+      const movieOverviewElement = new DomElement('div');
+
+      const genres =
+        newState.genres.length > 0
+          ? newState.genres
+              .filter(({ id }: { id: number }) => item.genre_ids.includes(id))
+              .map((genre: any) => genre.name)
+              .join(', ')
+          : '';
+
+      console.log(genres);
+
+      movieOverviewElement.setInnerHtml(`
+        <div class="movie-overview display-none" id="overview-${item.id}">
+         ${item.overview}
+         <hr></hr>
+         ${genres}
+        </div>
+      `);
+
       const element = new DomElement('div');
       element
         .setInnerHtml(item.title)
@@ -54,12 +87,13 @@ export async function moveList() {
           openModal(item);
         })
         .on('mouseenter', () => {
-          console.log('enters', item.id);
+          showMovieOverview(item.id);
         })
         .on('mouseleave', () => {
-          console.log(item.id);
+          hideMovieOverview(item.id);
         })
-        .appendElement(movieDetailsElement.current);
+        .appendElement(movieDetailsElement.current)
+        .appendElement(movieOverviewElement.current);
 
       return element.current;
     });

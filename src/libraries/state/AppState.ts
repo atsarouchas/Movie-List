@@ -9,6 +9,7 @@ const initialState = {
   totalPages: null,
   query: null,
   error: null,
+  genres: [],
 };
 
 export class AppState {

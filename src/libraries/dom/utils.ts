@@ -33,3 +33,9 @@ export const showScrollToTop = () =>
 
 export const hideScrollToTop = () =>
   document.getElementById('scroll-to-top')?.classList.add('display-none');
+
+export const showMovieOverview = (id: number) =>
+  document.getElementById(`overview-${id}`)?.classList.remove('display-none');
+
+export const hideMovieOverview = (id: number) =>
+  document.getElementById(`overview-${id}`)?.classList.add('display-none');
