@@ -16,7 +16,7 @@ export class DomElement {
     return this;
   }
 
-  setAttribute(attrName: string, attrValue: any) {
+  setAttribute(attrName: string, attrValue: string) {
     this.current.setAttribute(attrName, attrValue);
     return this;
   }

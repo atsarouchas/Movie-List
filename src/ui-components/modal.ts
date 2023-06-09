@@ -3,6 +3,7 @@ import { hideModal, showLoading, showModal } from '../libraries/dom/utils';
 import { state } from '../libraries/state/AppState';
 import { toggleModal } from '../libraries/state/actions';
 import { fetchMovieDetails } from '../services/fetchMovieDetails';
+import { Movie } from '../types';
 
 const handleKeyDown = (event: KeyboardEvent) => {
   if (event.code === 'Escape') {
@@ -10,7 +11,7 @@ const handleKeyDown = (event: KeyboardEvent) => {
   }
 };
 
-export const renderModal = async (data: any, id: number) => {
+export const renderModal = async (data: Movie, id: number) => {
   const backdrop = document.querySelector('.backdrop');
   const modal = document.querySelector('.modal') as HTMLElement;
 
@@ -56,7 +57,9 @@ export const renderModal = async (data: any, id: number) => {
       }
     );
 
-    const similarMovieElements = similarMovies.map((movie: any) => {
+    const similarMovieElements = similarMovies.map((movie: Movie) => {
+      const { title, release_date, vote_average, poster_path } = movie;
+
       const similarMovie = new DomElement('div');
       similarMovie.setAttribute('class', 'similar-movie');
       similarMovie.on('click', () => {
@@ -65,14 +68,14 @@ export const renderModal = async (data: any, id: number) => {
       });
       similarMovie.setInnerHtml(`
         <img src="${
-          movie?.poster_path
-            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+          poster_path
+            ? `https://image.tmdb.org/t/p/w500${poster_path}`
             : 'https://nogalss.org/admin/assets/images/no-image2.png'
         }" >
-        <span><b>${movie.title}</b> (${
-        new Date(movie.release_date).getFullYear() || ''
+        <span><b>${title}</b> (${
+        new Date(release_date).getFullYear() || ''
       })</span>
-        <span class="rating">${movie.vote_average.toFixed(1)} ☆</span>
+        <span class="rating">${vote_average.toFixed(1)} ☆</span>
       `);
 
       return similarMovie.current;
@@ -91,11 +94,11 @@ export const renderModal = async (data: any, id: number) => {
 
     modalContent.appendElement(videoElement.current);
     modalContent.appendElement(reviewsHeader.current);
-    reviewElements.forEach((element: any) =>
+    reviewElements.forEach((element: HTMLElement) =>
       modalContent.appendElement(element)
     );
     modalContent.appendElement(similarMoviesHeader.current);
-    similarMovieElements.forEach((element: any) =>
+    similarMovieElements.forEach((element: HTMLElement) =>
       modalContent.appendElement(element)
     );
   } catch (error) {

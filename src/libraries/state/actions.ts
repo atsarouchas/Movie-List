@@ -1,4 +1,4 @@
-import { MovieResults, SearchMovieResults } from '../../types';
+import { Movie, MovieResults, SearchMovieResults } from '../../types';
 import { state } from './AppState';
 
 export const setInitialNowPlayingMovies = (data: MovieResults) => {
@@ -39,7 +39,7 @@ export const setError = (errorText: string) => {
   });
 };
 
-export const toggleModal = (item: any) => {
+export const toggleModal = (item: Movie | null) => {
   const currentState = state.getState();
   state.setState({
     ...currentState,

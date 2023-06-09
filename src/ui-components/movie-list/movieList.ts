@@ -10,6 +10,7 @@ import {
   setGenres,
 } from '../../libraries/state/actions';
 import { fetchGenres } from '../../services/fetchGenres';
+import { Movie } from '../../types';
 import { fetchWhenScrollToBottom } from './ui-effects/fetchWhenScrollToBottom';
 import { fetchNowPlayingInitial } from './ui-effects/initialFetch';
 
@@ -38,14 +39,24 @@ export async function moveList() {
       return app?.append(element.current);
     }
 
-    const elements = (newState.moviesInView || []).map((item: any) => {
-      if (document.getElementById(item.id)) {
+    const elements = (newState.moviesInView || []).map((item: Movie) => {
+      const {
+        id,
+        release_date,
+        vote_average,
+        poster_path,
+        genre_ids,
+        overview,
+        title,
+      } = item;
+
+      if (document.getElementById(`${id}`)) {
         return;
       }
 
       const movieDetailsElement = new DomElement('div');
 
-      const releaseDate = new Date(item.release_date);
+      const releaseDate = new Date(release_date);
       const year = releaseDate.getFullYear();
 
       movieDetailsElement.setInnerHtml(`
@@ -53,8 +64,8 @@ export async function moveList() {
           <hr></hr>
           <div>
             ${
-              !isNaN(item.vote_average.toFixed(1))
-                ? `<span>${item.vote_average.toFixed(1)}☆</span>`
+              !isNaN(Number(vote_average.toFixed(1)))
+                ? `<span>${vote_average.toFixed(1)}☆</span>`
                 : ''
             }
             ${!isNaN(year) ? `<span>${year}</span>` : ''}
@@ -67,36 +78,33 @@ export async function moveList() {
       const genres =
         newState.genres.length > 0
           ? newState.genres
-              .filter(({ id }: { id: number }) => item.genre_ids.includes(id))
-              .map((genre: any) => genre.name)
+              .filter(({ id }: { id: number }) => genre_ids.includes(id))
+              .map((genre: { name: string }) => genre.name)
               .join(', ')
           : '';
 
       movieOverviewElement.setInnerHtml(`
-        <div class="movie-overview display-none" id="overview-${item.id}">
-         ${item.overview}
-         <hr></hr>
-         ${genres}
+        <div class="movie-overview display-none" id="overview-${id}">
+          ${overview}
+          <hr></hr>
+          ${genres}
         </div>
       `);
 
       const element = new DomElement('div');
       element
-        .setInnerHtml(item.title)
-        .setAttribute('id', item.id)
-        .setAttribute(
-          'class',
-          `movie-card ${item.poster_path ? '' : 'no-image'}`
-        )
+        .setInnerHtml(title)
+        .setAttribute('id', `${id}`)
+        .setAttribute('class', `movie-card ${poster_path ? '' : 'no-image'}`)
         .setAttribute(
           'style',
           `background-image:${
-            item.poster_path
-              ? `url(https://image.tmdb.org/t/p/w500${item.poster_path})`
+            poster_path
+              ? `url(https://image.tmdb.org/t/p/w500${poster_path})`
               : 'url(https://nogalss.org/admin/assets/images/no-image2.png)'
           }`
         )
-        .setAttribute('tabIndex', 0)
+        .setAttribute('tabIndex', '0')
         .on('click', () => {
           toggleModal(item);
         })
@@ -106,10 +114,10 @@ export async function moveList() {
           }
         })
         .on('mouseenter', () => {
-          showMovieOverview(item.id);
+          showMovieOverview(id);
         })
         .on('mouseleave', () => {
-          hideMovieOverview(item.id);
+          hideMovieOverview(id);
         })
         .appendElement(movieDetailsElement.current)
         .appendElement(movieOverviewElement.current);
@@ -117,9 +125,9 @@ export async function moveList() {
       return element.current;
     });
 
-    elements.forEach((el: HTMLElement) => {
-      if (el) {
-        app?.append(el);
+    elements.forEach((element: HTMLElement) => {
+      if (element) {
+        app?.append(element);
       }
     });
 
