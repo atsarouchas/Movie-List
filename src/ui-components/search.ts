@@ -14,6 +14,8 @@ export function search(): void {
 
   const debouncedInputHandler = debounce((e: Event) => {
     const query = (<HTMLTextAreaElement>e?.target).value;
+    const app = document.getElementById('app') as HTMLElement;
+    app.innerHTML = '';
 
     if (query === '') {
       return fetchNowPlayingInitial();
@@ -30,8 +32,6 @@ export function search(): void {
   }, 1000);
 
   search?.addEventListener('input', (e) => {
-    const app = document.getElementById('app') as HTMLElement;
-    app.innerHTML = '';
     hideEndOfResults();
     hideError();
     showLoading();

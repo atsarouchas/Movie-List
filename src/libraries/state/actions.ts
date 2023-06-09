@@ -6,6 +6,7 @@ export const setInitialNowPlayingMovies = (data: MovieResults) => {
   state.setState({
     ...initialState,
     moviesInView: data.results,
+    currentPage: 1,
     query: null,
     cachedPages: {
       [data.page]: [...data.results],
@@ -24,7 +25,7 @@ export const setMovies = (data: MovieResults) => {
       ...currentState.cachedPages,
       [data.page]: [...data.results],
     },
-    pagesInView: [...currentState.pagesInView, data.page],
+    pagesInView: [...(currentState.pagesInView || []), data.page],
     currentPage: data.page,
     totalPages: data.total_pages,
   });

@@ -1,4 +1,4 @@
-import { DomElement } from './DomElement';
+import { DomElement } from '../DomElement';
 
 describe('DomElement', () => {
   let domElement: DomElement;

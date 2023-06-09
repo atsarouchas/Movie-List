@@ -11,7 +11,7 @@ import {
 } from '../../libraries/state/actions';
 import { fetchGenres } from '../../services/fetchGenres';
 import { Movie } from '../../types';
-import { fetchWhenScrollToBottom } from './ui-effects/fetchWhenScrollToBottom';
+import { createIntersectionObserver } from './ui-effects/createIntersectionObserver';
 import { fetchNowPlayingInitial } from './ui-effects/initialFetch';
 
 window.onload = async () => {
@@ -95,7 +95,7 @@ export async function moveList() {
       element
         .setInnerHtml(title)
         .setAttribute('id', `${id}`)
-        .setAttribute('class', `movie-card ${poster_path ? '' : 'no-image'}`)
+        .setAttribute('class', `movie-card${poster_path ? '' : ' no-image'}`)
         .setAttribute(
           'style',
           `background-image:${
@@ -131,6 +131,10 @@ export async function moveList() {
       }
     });
 
-    fetchWhenScrollToBottom();
+    const lastElement = elements[elements.length - 1];
+
+    if (lastElement) {
+      createIntersectionObserver(lastElement.id);
+    }
   });
 }
