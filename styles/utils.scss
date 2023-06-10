@@ -1,0 +1,15 @@
+.display-none {
+  display: none !important;
+}
+
+.visible {
+  visibility: visible !important;
+}
+
+.not-visible {
+  visibility: hidden !important;
+}
+
+.blurry {
+  filter: blur(6px);
+}

@@ -4,7 +4,7 @@ import { modal } from './ui-components/modal';
 import { error } from './ui-components/error';
 import { scrollToTop } from './ui-components/scrollToTop';
 
-import '../styles/styles.scss';
+import '../styles/main.scss';
 
 function main() {
   moveList();

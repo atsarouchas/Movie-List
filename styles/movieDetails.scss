@@ -1,0 +1,25 @@
+.movie-details {
+  color: black;
+
+  & div {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  & span {
+    background-color: gold;
+    opacity: 0.8;
+    text-shadow: none;
+    font-weight: normal;
+    padding: 4px;
+    border-radius: 4px;
+    line-height: 22px;
+  }
+
+  & article {
+    font-weight: normal;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}

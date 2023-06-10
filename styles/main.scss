@@ -1,0 +1,71 @@
+@import '_common';
+@import 'loading';
+@import 'modal';
+@import 'movieCard';
+@import 'movieDetails';
+@import 'search';
+@import 'utils';
+
+body {
+  background-color: $primary-color;
+}
+
+header {
+  text-align: center;
+  color: white;
+  padding: 24px;
+}
+
+main {
+  text-align: center;
+  color: white;
+  height: 100%;
+}
+
+.main-content {
+  z-index: 0;
+}
+
+#app {
+  padding: 20px;
+  background-color: $primary-color;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 24px;
+}
+
+#scroll-to-top {
+  position: fixed;
+  width: 70px;
+  height: 70px;
+  background-color: #4949e3;
+  bottom: 40px;
+  right: 40px;
+  border-radius: 100%;
+  transition: all .2s linear;
+  text-align: center;
+  padding-top: 14px;
+}
+
+#scroll-to-top:hover {
+  background: darkblue;
+  cursor: pointer;
+}
+
+#end-of-results {
+  margin: 40px;
+  font-size: large;
+  font-weight: bold;
+}
+
+#error {
+  font-size: x-large;
+  color: red;
+}
+
+#movie-not-found {
+  font-size: 40px;
+  margin-top: 40px;
+}
