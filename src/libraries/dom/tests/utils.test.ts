@@ -27,7 +27,7 @@ describe('DOM utils', () => {
     jest.clearAllMocks();
   });
 
-  test('showLoading should remove "display-none" class from loading container element', () => {
+  it('showLoading should remove "display-none" class from loading container element', () => {
     getElementByIdSpy.mockReturnValueOnce({
       classList: classListMock,
     } as any);
@@ -38,7 +38,7 @@ describe('DOM utils', () => {
     expect(classListMock.remove).toHaveBeenCalledWith('display-none');
   });
 
-  test('hideLoading should add "display-none" class to loading container element', () => {
+  it('hideLoading should add "display-none" class to loading container element', () => {
     getElementByIdSpy.mockReturnValueOnce({
       classList: classListMock,
     } as any);
@@ -49,7 +49,7 @@ describe('DOM utils', () => {
     expect(classListMock.add).toHaveBeenCalledWith('display-none');
   });
 
-  test('showEndOfResults should remove "display-none" class from end of results element', () => {
+  it('showEndOfResults should remove "display-none" class from end of results element', () => {
     getElementByIdSpy.mockReturnValueOnce({
       classList: classListMock,
     } as any);
@@ -60,7 +60,7 @@ describe('DOM utils', () => {
     expect(classListMock.remove).toHaveBeenCalledWith('display-none');
   });
 
-  test('hideEndOfResults should add "display-none" class to end of results element', () => {
+  it('hideEndOfResults should add "display-none" class to end of results element', () => {
     getElementByIdSpy.mockReturnValueOnce({
       classList: classListMock,
     } as any);

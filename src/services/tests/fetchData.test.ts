@@ -14,7 +14,7 @@ describe('fetchData', () => {
     cache.clearCache();
   });
 
-  test('should return cached data if available', async () => {
+  it('should return cached data if available', async () => {
     const url = 'https://example.com/api/data';
     const cachedData = { id: 1, name: 'Cached Data' };
     jest.spyOn(cache, 'isDataInCache').mockReturnValue(cachedData);
@@ -28,7 +28,7 @@ describe('fetchData', () => {
     expect(hideLoading).toHaveBeenCalled();
   });
 
-  test('should fetch data and cache it if not available in cache', async () => {
+  it('should fetch data and cache it if not available in cache', async () => {
     const url = 'https://example.com/api/data/2';
     const responseData = { id: 2, name: 'Fetched Data' };
     const response = { json: jest.fn().mockResolvedValue(responseData) };
@@ -44,7 +44,7 @@ describe('fetchData', () => {
     expect(hideLoading).toHaveBeenCalled();
   });
 
-  test('should hide loading even if an error occurs', async () => {
+  it('should hide loading even if an error occurs', async () => {
     const url = 'https://example.com/api/data';
     const errorMessage = 'An error occurred';
     jest.spyOn(cache, 'isDataInCache').mockReturnValue(false);

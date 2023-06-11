@@ -9,7 +9,7 @@ global.process = {
 } as unknown as NodeJS.Process;
 
 describe('searchMovies', () => {
-  test('should call fetchData with the correct URL', async () => {
+  it('should call fetchData with the correct URL', async () => {
     const mockedFetchData = fetchData as jest.MockedFunction<typeof fetchData>;
     const expectedUrl = `https://api.themoviedb.org/3/search/movie?api_key=mock_api_key&language=en-US&query=lord&page=1&include_adult=false`;
 
@@ -18,7 +18,7 @@ describe('searchMovies', () => {
     expect(mockedFetchData).toHaveBeenCalledWith(expectedUrl);
   });
 
-  test('should return the data returned by fetchData', async () => {
+  it('should return the data returned by fetchData', async () => {
     const mockedFetchData = fetchData as jest.MockedFunction<typeof fetchData>;
     const mockData = {
       results: [{ id: 'movie' }],

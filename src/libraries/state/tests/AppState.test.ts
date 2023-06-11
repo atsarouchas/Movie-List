@@ -12,12 +12,12 @@ describe('AppState', () => {
     mockListener_2 = jest.fn();
   });
 
-  test('getState should return the current state', () => {
+  it('getState should return the current state', () => {
     const currentState = appState.getState();
     expect(currentState).toEqual({ data: 'initial state' });
   });
 
-  test('setState should update the state and notify listeners', () => {
+  it('setState should update the state and notify listeners', () => {
     const newState = { data: 'new state' };
 
     appState.subscribe(mockListener);
@@ -28,12 +28,12 @@ describe('AppState', () => {
     expect(mockListener).toHaveBeenCalledWith(newState);
   });
 
-  test('subscribe should add a listener to the listeners array', () => {
+  it('subscribe should add a listener to the listeners array', () => {
     appState.subscribe(mockListener);
     expect(appState['listeners']).toContain(mockListener);
   });
 
-  test('notifyListeners should call all subscribed listeners with the current state', () => {
+  it('notifyListeners should call all subscribed listeners with the current state', () => {
     appState.subscribe(mockListener);
     appState.subscribe(mockListener_2);
 

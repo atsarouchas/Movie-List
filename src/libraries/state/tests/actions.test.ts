@@ -13,7 +13,7 @@ describe('AppState actions', () => {
     state.setState({});
   });
 
-  test('setInitialNowPlayingMovies should update the state correctly', () => {
+  it('setInitialNowPlayingMovies should update the state correctly', () => {
     const data = {
       results: [{ id: 'movie1' }, { id: 'movie2' }],
       page: 1,
@@ -35,7 +35,7 @@ describe('AppState actions', () => {
     expect(currentState.totalPages).toBe(5);
   });
 
-  test('setMovies should update the state correctly', () => {
+  it('setMovies should update the state correctly', () => {
     const data = {
       results: [{ id: 'movie1' }, { id: 'movie2' }],
       page: 1,
@@ -56,7 +56,7 @@ describe('AppState actions', () => {
     expect(currentState.totalPages).toBe(5);
   });
 
-  test('setError should update the state correctly', () => {
+  it('setError should update the state correctly', () => {
     const errorText = 'An error occurred';
 
     setError(errorText);
@@ -66,7 +66,7 @@ describe('AppState actions', () => {
     expect(currentState.error).toBe(errorText);
   });
 
-  test('toggleModal should update the state correctly', () => {
+  it('toggleModal should update the state correctly', () => {
     const movie = {
       id: 1,
       title: 'Movie Title',
@@ -84,7 +84,7 @@ describe('AppState actions', () => {
     expect(currentState.modalData.title).toBe(movie.title);
   });
 
-  test('setSearchMovies should update the state correctly', () => {
+  it('setSearchMovies should update the state correctly', () => {
     const data = {
       results: [{ id: 'movie1' }, { id: 'movie2' }],
       page: 1,
@@ -107,7 +107,7 @@ describe('AppState actions', () => {
     expect(currentState.totalPages).toBe(5);
   });
 
-  test('setGenres should update the state correctly', () => {
+  it('setGenres should update the state correctly', () => {
     const data = {
       genres: [
         { id: 1, name: 'Genre 1' },

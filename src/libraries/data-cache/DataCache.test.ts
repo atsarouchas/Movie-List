@@ -4,7 +4,7 @@ describe('DataCache', () => {
   beforeEach(() => {
     cache.clearCache();
   });
-  test('isDataInCache returns cached data if available', () => {
+  it('isDataInCache returns cached data if available', () => {
     const url = '/data';
     const data = { id: 1, name: 'John Doe' };
 
@@ -15,7 +15,7 @@ describe('DataCache', () => {
     expect(result).toEqual(data);
   });
 
-  test('isDataInCache returns false if data is not in cache', () => {
+  it('isDataInCache returns false if data is not in cache', () => {
     const url = '/data';
 
     const result = cache.isDataInCache(url);
@@ -23,7 +23,7 @@ describe('DataCache', () => {
     expect(result).toBe(false);
   });
 
-  test('setDataInCache stores data in the cache', () => {
+  it('setDataInCache stores data in the cache', () => {
     const url = '/data';
     const data = { id: 1, name: 'John Doe' };
 
