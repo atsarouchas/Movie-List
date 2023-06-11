@@ -42,3 +42,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag movierama-client:$(date +%s) --build-arg MOVIE_DB_API_KEY=${{ secrets.MOVIE_DB_API_KEY }}
+      - name: Deploy to Netlify
+        run: |
+          curl -X POST -d {} -H "Content-Type: application/json" -H "Authorization: Bearer ${{ secrets.NETLIFY_TOKEN }}" "https://api.netlify.com/build_hooks/6485d4f9d2a28e19f84b0d08"
