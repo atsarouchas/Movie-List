@@ -1,13 +1,8 @@
-import { moveList } from './ui-components/movie-list/movieList';
-import { search } from './ui-components/search';
-import { modal } from './ui-components/modal';
-import { error } from './ui-components/error';
-import { scrollToTop } from './ui-components/scrollToTop';
-
+import { movieList, search, modal, error, scrollToTop } from './ui-components';
 import '../styles/main.scss';
 
 function main() {
-  moveList();
+  movieList();
   search();
   modal();
   error();

@@ -1,5 +1,5 @@
-import { hideError, showError } from '../libraries/dom/utils';
-import { state } from '../libraries/state/AppState';
+import { hideError, showError } from '../libraries/dom/';
+import { state } from '../libraries/state/';
 
 export const error = () => {
   state.subscribe((newState) => {

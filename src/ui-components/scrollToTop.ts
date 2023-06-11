@@ -1,4 +1,4 @@
-import { hideScrollToTop, showScrollToTop } from '../libraries/dom/utils';
+import { hideScrollToTop, showScrollToTop } from '../libraries/dom/';
 
 export const scrollToTop = () => {
   document.getElementById('scroll-to-top')?.addEventListener('click', () => {

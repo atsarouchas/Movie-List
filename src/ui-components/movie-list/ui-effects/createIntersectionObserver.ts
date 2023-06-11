@@ -1,8 +1,6 @@
-import { state } from '../../../libraries/state/AppState';
-import { searchMovies } from '../../../services/searchMovies';
-import { fetchMovies } from '../../../services/fetchMovies';
-import { setMovies, setError } from '../../../libraries/state/actions';
-import { showEndOfResults, showLoading } from '../../../libraries/dom/utils';
+import { state, setMovies, setError } from '../../../libraries/state/';
+import { searchMovies, fetchMovies } from '../../../services/';
+import { showEndOfResults, showLoading } from '../../../libraries/dom/';
 
 const fetchNewPage = () => {
   const currentState = state.getState();

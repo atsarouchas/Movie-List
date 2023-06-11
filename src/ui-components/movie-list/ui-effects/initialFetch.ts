@@ -1,9 +1,9 @@
-import { hideEndOfResults, hideError } from '../../../libraries/dom/utils';
+import { hideEndOfResults, hideError } from '../../../libraries/dom/';
 import {
   setError,
   setInitialNowPlayingMovies,
-} from '../../../libraries/state/actions';
-import { fetchMovies } from '../../../services/fetchMovies';
+} from '../../../libraries/state/';
+import { fetchMovies } from '../../../services/';
 
 export const fetchNowPlayingInitial = () => {
   hideEndOfResults();

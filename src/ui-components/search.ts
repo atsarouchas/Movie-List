@@ -1,11 +1,6 @@
-import {
-  hideEndOfResults,
-  hideError,
-  showLoading,
-} from '../libraries/dom/utils';
-import { state } from '../libraries/state/AppState';
-import { setError, setSearchMovies } from '../libraries/state/actions';
-import { searchMovies } from '../services/searchMovies';
+import { hideEndOfResults, hideError, showLoading } from '../libraries/dom/';
+import { setError, setSearchMovies } from '../libraries/state/';
+import { searchMovies } from '../services/';
 import { debounce } from '../utils/debounce';
 import { fetchNowPlayingInitial } from './movie-list/ui-effects/initialFetch';
 

@@ -1,7 +1,10 @@
-import { DomElement } from '../libraries/dom/DomElement';
-import { hideModal, showLoading, showModal } from '../libraries/dom/utils';
-import { state } from '../libraries/state/AppState';
-import { toggleModal } from '../libraries/state/actions';
+import {
+  DomElement,
+  hideModal,
+  showLoading,
+  showModal,
+} from '../libraries/dom/';
+import { state, toggleModal } from '../libraries/state/';
 import { fetchMovieDetails } from '../services/fetchMovieDetails';
 import { Movie } from '../types';
 

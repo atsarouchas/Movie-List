@@ -1,15 +1,15 @@
-import { DomElement } from '../../libraries/dom/DomElement';
 import {
+  DomElement,
   hideMovieOverview,
   showMovieOverview,
-} from '../../libraries/dom/utils';
-import { state } from '../../libraries/state/AppState';
+} from '../../libraries/dom/';
 import {
+  state,
   toggleModal,
   setError,
   setGenres,
-} from '../../libraries/state/actions';
-import { fetchGenres } from '../../services/fetchGenres';
+} from '../../libraries/state/';
+import { fetchGenres } from '../../services/';
 import { Movie } from '../../types';
 import { createIntersectionObserver } from './ui-effects/createIntersectionObserver';
 import { fetchNowPlayingInitial } from './ui-effects/initialFetch';
@@ -26,7 +26,7 @@ window.onload = async () => {
     });
 };
 
-export async function moveList() {
+export async function movieList() {
   state.subscribe((newState) => {
     const app = document.getElementById('app');
 
