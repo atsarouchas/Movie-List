@@ -8,6 +8,7 @@ This project was created with:
 - SASS
 - Webpack
 - Jest
+- Cypress
 - Github actions 
 
 ## Instructions
@@ -27,6 +28,7 @@ MOVIE_DB_API_KEY=your_api_key
 
 1. Run `npm test` to run unit tests
 2. Run `npm run test:coverage` to run unit tests and see a coverage report
+3. Run `npm run e2e` to run end to end cypress tests
 
 ## Structure
 
