@@ -2,7 +2,7 @@
 @import 'utils';
 
 .movie-card {
-  flex-basis: 240px;
+  width: 240px;
   height: 360px;
   border-radius: 4px;
   cursor: pointer;
@@ -13,14 +13,8 @@
   font-size: x-large;
   padding: 16px;
   position: relative;
+  margin: auto;
   overflow-y: auto;
-}
-
-.dwse {
-  @extend .centered;
-  position: absolute;
-  z-index: 500;
-  // transform: scale(2) !important;
 }
 
 .movie-card:hover, .movie-card:focus {
