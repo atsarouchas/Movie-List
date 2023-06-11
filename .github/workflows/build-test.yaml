@@ -33,3 +33,9 @@ jobs:
         run: npm test
       - name: Coverage report
         run: npm run test:coverage
+  
+  build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag movierama-client:$(date +%s) --build-arg MOVIE_DB_API_KEY=${{ secrets.MOVIE_DB_API_KEY }}
