@@ -35,7 +35,10 @@ jobs:
         run: npm run test:coverage
   
   build-docker-image:
+    needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag movierama-client:$(date +%s) --build-arg MOVIE_DB_API_KEY=${{ secrets.MOVIE_DB_API_KEY }}
