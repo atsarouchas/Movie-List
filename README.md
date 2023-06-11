@@ -27,3 +27,15 @@ MOVIE_DB_API_KEY=your_api_key
 
 1. Run `npm test` to run unit tests
 2. Run `npm run test:coverage` to run unit tests and see a coverage report
+
+## Structure
+
+- **src**
+  - **libraries**
+    - **data-cache**  *-a class for handling cache for requests*  
+    - **dom**  *-a class for creating new DOM elements and manipulating them. Also utils for toggling classes for dom elements*
+    - **state**  *-a class for holding the application state and the actions that change it*
+  - **services**  *- the functions used for http requests*
+  - **ui-components** *- the functions used for rendering of the application*
+    - **ui-effects** *- functions that handle ui effecs, such as infinite scrolling*   
+  - **utils** *- utility helpers*
