@@ -39,27 +39,28 @@ export async function movieList() {
       return app?.append(element.current);
     }
 
-    const elements = (newState.moviesInView || []).map((item: Movie) => {
-      const {
-        id,
-        release_date,
-        vote_average,
-        poster_path,
-        genre_ids,
-        overview,
-        title,
-      } = item;
+    const elements = (newState.moviesInView || [])
+      .map((item: Movie) => {
+        const {
+          id,
+          release_date,
+          vote_average,
+          poster_path,
+          genre_ids,
+          overview,
+          title,
+        } = item;
 
-      if (document.getElementById(`${id}`)) {
-        return;
-      }
+        if (document.getElementById(`${id}`)) {
+          return;
+        }
 
-      const movieDetailsElement = new DomElement('div');
+        const movieDetailsElement = new DomElement('div');
 
-      const releaseDate = new Date(release_date);
-      const year = releaseDate.getFullYear();
+        const releaseDate = new Date(release_date);
+        const year = releaseDate.getFullYear();
 
-      movieDetailsElement.setInnerHtml(`
+        movieDetailsElement.setInnerHtml(`
         <div class="movie-details">
           <hr></hr>
           <div>
@@ -73,17 +74,17 @@ export async function movieList() {
         </div>
       `);
 
-      const movieOverviewElement = new DomElement('div');
+        const movieOverviewElement = new DomElement('div');
 
-      const genres =
-        newState.genres.length > 0
-          ? newState.genres
-              .filter(({ id }: { id: number }) => genre_ids.includes(id))
-              .map((genre: { name: string }) => genre.name)
-              .join(', ')
-          : '';
+        const genres =
+          newState.genres.length > 0
+            ? newState.genres
+                .filter(({ id }: { id: number }) => genre_ids.includes(id))
+                .map((genre: { name: string }) => genre.name)
+                .join(', ')
+            : '';
 
-      movieOverviewElement.setInnerHtml(`
+        movieOverviewElement.setInnerHtml(`
         <div class="movie-overview display-none" id="overview-${id}">
           ${overview}
           <hr></hr>
@@ -91,39 +92,40 @@ export async function movieList() {
         </div>
       `);
 
-      const element = new DomElement('div');
-      element
-        .setInnerHtml(title)
-        .setAttribute('id', `${id}`)
-        .setAttribute('class', `movie-card${poster_path ? '' : ' no-image'}`)
-        .setAttribute(
-          'style',
-          `background-image:${
-            poster_path
-              ? `url(https://image.tmdb.org/t/p/w500${poster_path})`
-              : 'url(https://nogalss.org/admin/assets/images/no-image2.png)'
-          }`
-        )
-        .setAttribute('tabIndex', '0')
-        .on('click', () => {
-          toggleModal(item);
-        })
-        .on('keydown', (event: KeyboardEvent) => {
-          if (event.code === 'Enter') {
+        const element = new DomElement('div');
+        element
+          .setInnerHtml(title)
+          .setAttribute('id', `${id}`)
+          .setAttribute('class', `movie-card${poster_path ? '' : ' no-image'}`)
+          .setAttribute(
+            'style',
+            `background-image:${
+              poster_path
+                ? `url(https://image.tmdb.org/t/p/w500${poster_path})`
+                : 'url(https://nogalss.org/admin/assets/images/no-image2.png)'
+            }`
+          )
+          .setAttribute('tabIndex', '0')
+          .on('click', () => {
             toggleModal(item);
-          }
-        })
-        .on('mouseenter', () => {
-          showMovieOverview(id);
-        })
-        .on('mouseleave', () => {
-          hideMovieOverview(id);
-        })
-        .appendElement(movieDetailsElement.current)
-        .appendElement(movieOverviewElement.current);
+          })
+          .on('keydown', (event: KeyboardEvent) => {
+            if (event.code === 'Enter') {
+              toggleModal(item);
+            }
+          })
+          .on('mouseenter', () => {
+            showMovieOverview(id);
+          })
+          .on('mouseleave', () => {
+            hideMovieOverview(id);
+          })
+          .appendElement(movieDetailsElement.current)
+          .appendElement(movieOverviewElement.current);
 
-      return element.current;
-    });
+        return element.current;
+      })
+      .filter((element: any) => element !== undefined);
 
     elements.forEach((element: HTMLElement) => {
       if (element) {
