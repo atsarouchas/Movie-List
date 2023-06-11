@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: 14
       - name: Install dependencies
-        run: npm install
+        run: npm install --only=dev
       - name: Build app
         run: npm run build
 
