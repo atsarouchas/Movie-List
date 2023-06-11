@@ -3,7 +3,6 @@ type StateListener = (state: any) => void;
 const initialState = {
   modalOpen: null,
   currentPage: 1,
-  cachedPages: null,
   moviesInView: [],
   pagesInView: [],
   totalPages: null,

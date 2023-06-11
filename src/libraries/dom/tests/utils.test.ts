@@ -3,14 +3,6 @@ import {
   hideLoading,
   showEndOfResults,
   hideEndOfResults,
-  showError,
-  hideError,
-  showScrollToTop,
-  hideScrollToTop,
-  showMovieOverview,
-  hideMovieOverview,
-  showModal,
-  hideModal,
 } from '../utils';
 
 describe('DOM utils', () => {
@@ -79,5 +71,5 @@ describe('DOM utils', () => {
     expect(classListMock.add).toHaveBeenCalledWith('display-none');
   });
 
-  // Write similar tests for other functions...
+  // similar tests for other functions...
 });

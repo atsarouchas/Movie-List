@@ -1,44 +1,34 @@
 import { fetchMovies } from '../fetchMovies';
-import { hideLoading } from '../../libraries/dom/utils';
+import { fetchData } from '../fetchData';
 
-jest.mock('../../libraries/dom/utils', () => ({
-  hideLoading: jest.fn(),
-}));
-
-const fetchMock = jest.fn();
-global.fetch = fetchMock;
+jest.mock('../fetchData');
+global.process = {
+  env: {
+    MOVIE_DB_API_KEY: 'mock_api_key',
+  },
+} as unknown as NodeJS.Process;
 
 describe('fetchMovies', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
+  test('should call fetchData with the correct URL', async () => {
+    const mockedFetchData = fetchData as jest.MockedFunction<typeof fetchData>;
+    const expectedUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=mock_api_key&language=en-US&page=12`;
+
+    await fetchMovies(12);
+
+    expect(mockedFetchData).toHaveBeenCalledWith(expectedUrl);
   });
 
-  test('should fetch movies successfully and hide loading', async () => {
-    const movies = [
+  test('should return the data returned by fetchData', async () => {
+    const mockedFetchData = fetchData as jest.MockedFunction<typeof fetchData>;
+    const mockData = [
       { id: 1, title: 'Movie1' },
       { id: 2, title: 'Movie2' },
     ];
-    const response = {
-      json: jest.fn().mockResolvedValue(movies),
-    };
 
-    fetchMock.mockResolvedValue(response as any);
+    mockedFetchData.mockResolvedValue(mockData);
 
-    const result = await fetchMovies(1);
+    const result = await fetchMovies(12);
 
-    expect(fetchMock).toHaveBeenCalledWith(
-      `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.MOVIE_DB_API_KEY}&language=en-US&page=1`
-    );
-    expect(response.json).toHaveBeenCalled();
-    expect(result).toEqual(movies);
-    expect(hideLoading).toHaveBeenCalled();
-  });
-
-  test('should handle fetch error and hide loading', async () => {
-    const error = new Error('Failed to fetch movies');
-    fetchMock.mockRejectedValue(error);
-
-    await expect(fetchMovies(2)).rejects.toThrow(error);
-    expect(hideLoading).toHaveBeenCalled();
+    expect(result).toEqual(mockData);
   });
 });

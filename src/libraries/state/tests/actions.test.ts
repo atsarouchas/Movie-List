@@ -31,7 +31,6 @@ describe('AppState actions', () => {
     expect(currentState.moviesInView).toEqual(data.results);
     expect(currentState.currentPage).toBe(1);
     expect(currentState.query).toBeNull();
-    expect(currentState.cachedPages[data.page]).toEqual(data.results);
     expect(currentState.pagesInView).toEqual([1]);
     expect(currentState.totalPages).toBe(5);
   });
@@ -52,7 +51,6 @@ describe('AppState actions', () => {
 
     const currentState = state.getState();
     expect(currentState.moviesInView).toEqual(data.results);
-    expect(currentState.cachedPages[data.page]).toEqual(data.results);
     expect(currentState.pagesInView).toContain(data.page);
     expect(currentState.currentPage).toBe(data.page);
     expect(currentState.totalPages).toBe(5);
@@ -104,7 +102,6 @@ describe('AppState actions', () => {
     const currentState = state.getState();
     expect(currentState.moviesInView).toEqual(data.results);
     expect(currentState.query).toBe(query);
-    expect(currentState.cachedPages[data.page]).toEqual(data.results);
     expect(currentState.pagesInView).toEqual([data.page]);
     expect(currentState.currentPage).toBe(data.page);
     expect(currentState.totalPages).toBe(5);

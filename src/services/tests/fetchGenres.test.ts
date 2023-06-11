@@ -1,44 +1,31 @@
 import { fetchGenres } from '../fetchGenres';
-import { hideLoading } from '../../libraries/dom/utils';
+import { fetchData } from '../fetchData';
 
-jest.mock('../../libraries/dom/utils', () => ({
-  hideLoading: jest.fn(),
-}));
-
-const fetchMock = jest.fn();
-global.fetch = fetchMock;
+jest.mock('../fetchData');
+global.process = {
+  env: {
+    MOVIE_DB_API_KEY: 'mock_api_key',
+  },
+} as unknown as NodeJS.Process;
 
 describe('fetchGenres', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
+  test('should call fetchData with the correct URL', async () => {
+    const mockedFetchData = fetchData as jest.MockedFunction<typeof fetchData>;
+    const expectedUrl =
+      'https://api.themoviedb.org/3/genre/movie/list?api_key=mock_api_key&language=en-US';
+
+    await fetchGenres();
+
+    expect(mockedFetchData).toHaveBeenCalledWith(expectedUrl);
   });
 
-  test('should fetch genres successfully and hide loading', async () => {
-    const genres = [
-      { id: 1, name: 'Action' },
-      { id: 2, name: 'Comedy' },
-    ];
-    const response = {
-      json: jest.fn().mockResolvedValue(genres),
-    };
-
-    fetchMock.mockResolvedValue(response as any);
+  test('should return the data returned by fetchData', async () => {
+    const mockedFetchData = fetchData as jest.MockedFunction<typeof fetchData>;
+    const mockData = { genres: ['Action', 'Comedy'] };
+    mockedFetchData.mockResolvedValue(mockData);
 
     const result = await fetchGenres();
 
-    expect(fetchMock).toHaveBeenCalledWith(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.MOVIE_DB_API_KEY}&language=en-US`
-    );
-    expect(response.json).toHaveBeenCalled();
-    expect(result).toEqual(genres);
-    expect(hideLoading).toHaveBeenCalled();
-  });
-
-  test('should handle fetch error and hide loading', async () => {
-    const error = new Error('Failed to fetch genres');
-    fetchMock.mockRejectedValue(error);
-
-    await expect(fetchGenres()).rejects.toThrow(error);
-    expect(hideLoading).toHaveBeenCalled();
+    expect(result).toEqual(mockData);
   });
 });

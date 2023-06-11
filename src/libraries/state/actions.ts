@@ -8,9 +8,6 @@ export const setInitialNowPlayingMovies = (data: MovieResults) => {
     moviesInView: data.results,
     currentPage: 1,
     query: null,
-    cachedPages: {
-      [data.page]: [...data.results],
-    },
     pagesInView: [1],
     totalPages: data.total_pages,
   });
@@ -21,10 +18,6 @@ export const setMovies = (data: MovieResults) => {
   state.setState({
     ...currentState,
     moviesInView: [...data.results],
-    cachedPages: {
-      ...currentState.cachedPages,
-      [data.page]: [...data.results],
-    },
     pagesInView: [...(currentState.pagesInView || []), data.page],
     currentPage: data.page,
     totalPages: data.total_pages,
@@ -58,9 +51,6 @@ export const setSearchMovies = (data: SearchMovieResults, query: string) => {
     ...currentState,
     moviesInView: [...data.results],
     query,
-    cachedPages: {
-      [data.page]: [...data.results],
-    },
     pagesInView: [data.page],
     currentPage: data.page,
     totalPages: data.total_pages,
