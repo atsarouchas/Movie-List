@@ -1,3 +1,5 @@
+@import '_common';
+
 .movie-details {
   color: black;
 
@@ -8,12 +10,12 @@
   }
 
   & span {
+    @extend .rounded;
     background-color: gold;
     opacity: 0.8;
     text-shadow: none;
     font-weight: normal;
     padding: 4px;
-    border-radius: 4px;
     line-height: 22px;
   }
 

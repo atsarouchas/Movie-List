@@ -14,12 +14,12 @@
 
 .modal {
   @extend .centered;
+  @extend .rounded;
   position: fixed !important;
   z-index: 2;
   width: 800px;
   height: 70vh;
   background-color: white;
-  border-radius: 4px;
   opacity: 1;
   text-align: center;
   overflow-y: auto;
@@ -34,18 +34,18 @@
 }
 
 .review {
+  @extend .rounded;
   text-align: left;
   padding: 16px;
   border: 2px solid lightgray;
-  border-radius: 4px;
   margin-top: 8px;
 }
 
 .similar-movie {
+  @extend .rounded;
   display: flex;
   border: 2px solid lightgray;
   margin: 4px;
-  border-radius: 4px;
   padding: 8px;
   gap: 24px;
   line-height: 22px;

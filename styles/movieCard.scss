@@ -2,9 +2,9 @@
 @import 'utils';
 
 .movie-card {
+  @extend .rounded;
   width: 240px;
   height: 360px;
-  border-radius: 4px;
   cursor: pointer;
   transition: all linear .2s;
   background-size: cover;
