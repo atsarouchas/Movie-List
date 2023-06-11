@@ -24,7 +24,9 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
-    new DotenvWebpackPlugin()
+    new DotenvWebpackPlugin({
+      systemvars: true
+    })
   ],
   devServer: {
     static: {
