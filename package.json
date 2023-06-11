@@ -7,11 +7,14 @@
     "start:docker": "docker build --build-arg MOVIE_DB_API_KEY=$(cat .env | grep MOVIE_DB_API_KEY | cut -d '=' -f2-) -t movierama-client . && docker run -p 3000:3000 -d --name movierama-container movierama-client",
     "build": "webpack --mode production",
     "test": "jest",
-    "test:coverage": "npm test -- --env=jsdom --coverage"
+    "test:coverage": "npm test -- --env=jsdom --coverage",
+    "e2e:open": "cypress open",
+    "e2e": "cypress run"
   },
   "devDependencies": {
     "@types/jest": "^27.5.2",
     "css-loader": "^6.5.1",
+    "cypress": "^12.14.0",
     "dotenv-webpack": "^8.0.1",
     "jest": "^27.0.6",
     "jsdom": "^22.1.0",

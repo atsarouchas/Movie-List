@@ -39,7 +39,7 @@ describe('search', () => {
     jest.clearAllTimers();
   });
 
-  test('should fetch movies when search input value is not empty', async () => {
+  it('should fetch movies when search input value is not empty', async () => {
     const searchElement = document.createElement('input');
     const app = document.createElement('div');
     app.id = 'app';
@@ -71,7 +71,7 @@ describe('search', () => {
     document.body.removeChild(searchElement);
   });
 
-  test('should fetch initial movies when search input value is empty', () => {
+  it('should fetch initial movies when search input value is empty', () => {
     const searchElement = document.createElement('input');
     searchElement.id = 'search';
     document.body.appendChild(searchElement);
